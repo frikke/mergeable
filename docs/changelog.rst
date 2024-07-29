@@ -1,5 +1,17 @@
 CHANGELOG
 =====================================
+| July 10, 2024: feat: Add trigger 'issue_comment' in validators `age`, `assignee`, `author`, `description`, `label`, `title` `#766 <https://github.com/mergeability/mergeable/pull/766>`_
+| June 25 2024: feat: Add buildpacks for building docker image `#764 <https://github.com/mergeability/mergeable/pull/764>`_
+| June 20, 2024: feat: Add options 'one_of' and 'none_of'. Support in filters `payload`, `author`, and in action `lastComment` to filter comments authors `#757 <https://github.com/mergeability/mergeable/pull/757>`_
+| June 20, 2024: feat: Add annotations @sender @bot @repository @action and template helper {{formatDate}} `#756 <https://github.com/mergeability/mergeable/pull/756>`_
+| June 20, 2024: fix: Comments on Issues should not trigger `checks` action `#759 <https://github.com/mergeability/mergeable/pull/759>`_
+| June 20, 2024: fix: Respect all comments in lastComment validator and comment action `#755 <https://github.com/mergeability/mergeable/pull/755>`_
+| June 12, 2024: feat: Support `issue_comment` event as trigger for actions `#754 <https://github.com/mergeability/mergeable/pull/754>`_
+| June 10, 2024: fix: Docker image not working `#753 <https://github.com/mergeability/mergeable/pull/753>`_
+| June 10, 2024: feat: publish multi arch docker image to dockerhub `#751 <https://github.com/mergeability/mergeable/pull/751>`_
+| April 29, 2024: fix: Always allow assigning author  `#744 <https://github.com/mergeability/mergeable/pull/744>`_
+| Mar 11, 2024: fix: bump dependencies probot, jest and nock to latest versions and update ci workflow to use node 20 `#738 <https://github.com/mergeability/mergeable/pull/738>`_ 
+| Feb 27, 2024: fix: search and replace of special annotations `#735 <https://github.com/mergeability/mergeable/pull/735>`_
 | May 12, 2023: fix: Loading teams for team option of author filter/validator `#713 <https://github.com/mergeability/mergeable/pull/713>`_
 | May 11, 2023: fix: Send correct payload for changing labels `#715 <https://github.com/mergeability/mergeable/pull/715>`_
 | April 25, 2023: feat: Add author validator `#710 <https://github.com/mergeability/mergeable/pull/710>`_

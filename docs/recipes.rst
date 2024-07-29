@@ -3,9 +3,12 @@
 Recipes
 --------------------------
 
+.. note::
+  Check out our :ref:`annotations-page` page for possible placeholders in values.
+
 Work In Progress
 """""""""""""""""
-Prevent accidental merging of Pull Requests that are work in progress by labeling it WIP or prefixing the title with the abbreviation.
+Prevent accidental merging of Pull Requests that are work in progress by labeling it `WIP` or prefixing the title with the abbreviation.
 
 ::
 
@@ -18,7 +21,7 @@ Prevent accidental merging of Pull Requests that are work in progress by labelin
               regex: ^\[WIP\]
           - do: label
             must_exclude:
-              regex: 'wip'
+              regex: 'wip|work in progress'
 
 No Empty Description
 """""""""""""""""
@@ -145,6 +148,38 @@ Add a comment on a pull request when it is created
                 Thanks for creating a pull request! A maintainer will review your changes shortly. Please don't be discouraged if it takes a while.
 
 
+React on a comment to merge pull requests
+"""""""""""""""""""""""""""""""""""""""""
+When a human creates a new comment or edits existing comment, ``mergeable`` finds a special command in it, to then execute a merge.
+The comment writer must be different from the PR author and be member of a specified team.
+
+::
+
+    version: 2
+    mergeable:
+      - when: issue_comment.*
+        name: "Merge pull requests when requested via comment"
+        filter:
+          - do: payload
+            sender:
+              login:
+                must_exclude:
+                  regex: '\[bot\]$'
+        validate:
+          - do: lastComment
+            must_include:
+              regex: 'merge$'
+              message: 'Comment "merge" detected, checking eligibility to merge the PR.'
+            must_exclude:
+              regex: '^\[ \]'
+              message: 'Comment contains unchecked items, can't merge yet.'
+            comment_author:
+              one_of: ['@org/product-owners-team']
+              none_of: ['@author']
+        pass:
+          - do: merge
+            merge_method: "squash"
+
 Auto-merge pull requests once all checks pass
 """""""""""""""""""""""""""""""""""""""""""""
 This recipe relies on the fact that the main branch has been protected and only allows merges
@@ -212,22 +247,17 @@ Checks that the PR's draft state is false before running actions.
     mergeable:
       - when: pull_request.*, pull_request_review.*
         name: 'Draft check'
-        validate:
+        filter:
           - do: payload
             pull_request:
               draft:
                 boolean:
                   match: false
-        pass:
-          - do: comment
-            payload:
-              body: This PR is NOT a draft!
-        fail:
-          - do: comment
-            payload:
-              body: This PR is STILL a draft!
-
-
+        validate:
+          - do: description
+            no_empty:
+              enabled: true
+              message: Description must be present when PR is not a draft
 
 
 Allow commits only if they contain a Issue ID (like an Azure DevOps Work Item)

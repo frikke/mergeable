@@ -1,5 +1,7 @@
-Check
+Checks
 ^^^^^^^^
+
+You can add check runs to a pull request to enforce that it can only be merged once all checks returned with success.
 
 .. note::
     The logic for whether checks will be added by default is as follows:
@@ -13,7 +15,7 @@ Check
       status: 'success' # Can be: success, failure, neutral, cancelled, timed_out, or action_required
       payload:
         title: 'Mergeable Run have been Completed!'
-        summary: "All the validators have returned 'pass'! \n Here are some stats of the run: \n {{validationCount}} validations were ran"
+        summary: "All the validators have returned 'pass'! \n Here are some stats of the run: \n {{validationCount}} validations were run"
 
 You can pass in Handlebars template to show the details result of the run.
 
@@ -26,7 +28,7 @@ You can pass in Handlebars template to show the details result of the run.
         summary: |
              ### Status: {{toUpperCase validationStatus}}
                   Here are some stats of the run:
-                  {{validationCount}} validations were ran.
+                  {{validationCount}} validations were run.
                   {{passCount}} PASSED
                   {{failCount}} FAILED
         text: "{{#each validationSuites}}\n
@@ -46,7 +48,7 @@ You can pass in Handlebars template to show the details result of the run.
         summary: |
             ### Status: {{toUpperCase validationStatus}}
             Some or All of the validators have returned 'error' status, please check below for details
-            Here are some stats of the run: \n {{validationCount}} validations were ran.
+            Here are some stats of the run: \n {{validationCount}} validations were run.
             {{passCount}} ***PASSED***
             {{failCount}} ***FAILED***
             {{errorCount}} ***ERRORED***
@@ -74,4 +76,4 @@ The `pull_request.closed` event is not supported since it does not have meaningf
 
 ::
 
-    'pull_request.assigned', 'pull_request.auto_merge_disabled', 'pull_request.auto_merge_enabled', 'pull_request.converted_to_draft', 'pull_request.demilestoned', 'pull_request.dequeued', 'pull_request.edited', 'pull_request.enqueued', 'pull_request.labeled', 'pull_request.locked', 'pull_request.milestoned', 'pull_request.opened', 'pull_request.push_synchronize', 'pull_request.ready_for_review', 'pull_request.reopened', 'pull_request.review_request_removed', 'pull_request.review_requested', 'pull_request.synchronize', 'pull_request.unassigned', 'pull_request.unlabeled', 'pull_request.unlocked', 'pull_request_review.dismissed', 'pull_request_review.edited', 'pull_request_review.submitted'
+    'pull_request.assigned', 'pull_request.auto_merge_disabled', 'pull_request.auto_merge_enabled', 'pull_request.converted_to_draft', 'pull_request.demilestoned', 'pull_request.dequeued', 'pull_request.edited', 'pull_request.enqueued', 'pull_request.labeled', 'pull_request.locked', 'pull_request.milestoned', 'pull_request.opened', 'pull_request.push_synchronize', 'pull_request.ready_for_review', 'pull_request.reopened', 'pull_request.review_request_removed', 'pull_request.review_requested', 'pull_request.synchronize', 'pull_request.unassigned', 'pull_request.unlabeled', 'pull_request.unlocked', 'pull_request_review.dismissed', 'pull_request_review.edited', 'pull_request_review.submitted', 'issue_comment.*'
